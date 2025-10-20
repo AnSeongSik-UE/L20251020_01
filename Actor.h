@@ -4,7 +4,6 @@
 #include <Windows.h>
 
 #include "Vector.h"
-#include "Actor.h"
 
 class AActor
 {
@@ -41,8 +40,13 @@ public:
 		Shape = Value;
 	}
 
+	__forceinline int GetZOrder() const
+	{
+		return ZOrder;
+	}
+
 protected:
 	FVector2D Location;
 	char Shape;
+	int ZOrder;
 };
-

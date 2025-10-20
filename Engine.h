@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <conio.h>
+#include <algorithm>
 
 #include "World.h"
 #include "Wall.h"
@@ -11,13 +12,16 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Goal.h"
+#include "Actor.h"
 
 class UWorld;
 
 class FEngine
 {
-public:
+protected:
 	FEngine();
+
+public:
 	virtual ~FEngine();
 
 	virtual void Init();
@@ -43,5 +47,21 @@ protected:
 	bool bIsRunning = true;
 
 	int KeyCode = 0;
+
+//ΩÃ±€≈Ê
+public:
+	static FEngine* GetInstance()
+	{
+		if (Instance == nullptr)
+		{
+			Instance = new FEngine;
+		}
+		return Instance;
+	}
+protected:
+	static FEngine* Instance;
 };
 
+//extern FEngine* GEngine;
+
+#define GEngine FEngine::GetInstance()

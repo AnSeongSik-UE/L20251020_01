@@ -1,5 +1,9 @@
 #include "Engine.h"
 
+//FEngine* GEngine = nullptr;
+
+FEngine* FEngine::Instance = nullptr;
+
 FEngine::FEngine() : World(nullptr)
 {
 
@@ -31,13 +35,6 @@ void FEngine::Init()
 					NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
-				else if (Line[X] == ' ')
-				{
-					AActor* NewActor = new AFloor();
-					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(Line[X]);
-					World->SpawnActor(NewActor);
-				}
 				else if (Line[X] == 'P')
 				{
 					AActor* NewActor = new APlayer();
@@ -59,10 +56,25 @@ void FEngine::Init()
 					NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
+
+				{
+					AActor* NewActor = new AFloor();
+					NewActor->SetActorLocation(FVector2D(X, Y));
+					NewActor->SetShape(Line[X]);
+					World->SpawnActor(NewActor);
+				}
 			}
 			Y++;
 		}
 	}
+	//1.
+	std::sort(World->GetAllActors().begin(),
+		World->GetAllActors().end(),
+		[](const AActor* A, const AActor* B) {
+			return A->GetZOrder() > B->GetZOrder();
+		});
+	//2. 정렬 로직 구현
+	//selection sort
 
 	MapFile.close();
 }
@@ -79,10 +91,9 @@ void FEngine::Term()
 {
 
 }
-
 void FEngine::Input()
 {
-	int KeyCode = _getch();
+	KeyCode = _getch();
 }
 void FEngine::Tick()
 {

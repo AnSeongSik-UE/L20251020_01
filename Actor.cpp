@@ -1,6 +1,6 @@
 #include "Actor.h"
 
-AActor::AActor() : Shape(' '), Location(0, 0)
+AActor::AActor() : ZOrder(0), Shape(' '), Location(0, 0)
 {
 }
 AActor::~AActor()

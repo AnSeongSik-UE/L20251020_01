@@ -16,7 +16,7 @@ public:
 	virtual void Tick();
 	virtual void Render();
 
-	std::vector<AActor*> GetAllActors() const;
+	void GetAllActors(std::vector<AActor*>& OutActors) const;
 	AActor* SpawnActor(AActor* NewActor);
 protected:
 	std::vector<AActor*> Actors;
