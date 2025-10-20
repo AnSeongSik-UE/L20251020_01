@@ -1,6 +1,10 @@
 #pragma once
 
+#include <iostream>
+#include <Windows.h>
+
 #include "Vector.h"
+#include "Actor.h"
 
 class AActor
 {
@@ -9,6 +13,7 @@ public:
 	virtual ~AActor();
 
 	virtual void Tick();
+	virtual void Render();
 
 	//inline은 해당 코드 자체를 불러와서 빠름
 	//inline은 컴파일러가 더 좋은 방안을 생각함
@@ -25,7 +30,19 @@ public:
 		Location.X = Value.X;
 		Location.Y = Value.Y;
 	}
-private:
+
+	__forceinline char GetShape()
+	{
+		return Shape;
+	}
+
+	void SetShape(char Value)
+	{
+		Shape = Value;
+	}
+
+protected:
 	FVector2D Location;
+	char Shape;
 };
 
