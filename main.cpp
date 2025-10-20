@@ -1,17 +1,32 @@
 #include <iostream>
-#include "Actor.h"
-#include "Player.h"
+#include <fstream>
+#include <vector>
 
-int main()
+#include "Engine.h"
+
+int main(int argc, char* argv[])
 {
-	AActor* AActors[2];
-	AActors[0] = new AActor();
-	AActors[1] = new APlayer();
+	//FEngine* MyEngine = new FEngine();
+	//MyEngine->Init();
+	//MyEngine->Run();
+	//MyEngine->Term();
 
-	for (int i = 0; i < 2; ++i)
-	{
-		AActors[i]->Tick();	//형태 바뀜, 형태 많다, 다형성, Polymorphism
+	//delete MyEngine;
+	//MyEngine = nullptr;
+
+	char Actor;
+	std::ifstream MapFile("Level01.map");
+
+	if (!MapFile.is_open()) {
+		std::cerr << "Error: Could not open file." << std::endl;
 	}
+
+	while (MapFile.get(Actor))
+	{
+		std::cout << Actor;
+	}
+
+	MapFile.close();
 
 	return 0;
 }
